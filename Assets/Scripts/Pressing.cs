@@ -6,21 +6,26 @@ public class Pressing : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
 
-    public bool isClickOnCub { get; private set; } = false;
+    public GameObject ClickedCub { get; private set; }
 
     private Ray _ray;
     private RaycastHit hit;
 
-    private void OnMouseUpAsButton()
+    private void Update()
     {
-        _ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(_ray, out hit))
+        if (Input.GetMouseButtonDown(0))
         {
-            if(hit.transform.tag == "Cub")
+            _ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(_ray, out hit))
             {
-                isClickOnCub = true;
-            }           
+                Cube cube = hit.collider.gameObject.GetComponent<Cube>();
+
+                if (cube != null)
+                {
+                    ClickedCub = hit.collider.gameObject;
+                }
+            }
         }
     }
 }
