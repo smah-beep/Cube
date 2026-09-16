@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,10 @@ public class Pressing : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
 
-    public GameObject ClickedCub { get; private set; }
-
     private Ray _ray;
     private RaycastHit hit;
+
+    public event Action<Cube> cubeClicked;
 
     private void Update()
     {
@@ -23,7 +24,7 @@ public class Pressing : MonoBehaviour
 
                 if (cube != null)
                 {
-                    ClickedCub = hit.collider.gameObject;
+                    cubeClicked?.Invoke(cube);
                 }
             }
         }

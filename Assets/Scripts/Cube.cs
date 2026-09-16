@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    public float ChanceSeparation = 100f;
+    private float _chanceSeparation = 100f;   
+    private float _coefficientÂecrease = 2f;
     private Renderer _renderer;
+
+    public float GetChanceSeparation() => _chanceSeparation;
 
     private void Awake()
     {
@@ -19,6 +22,11 @@ public class Cube : MonoBehaviour
 
     public void Shrink()
     {
-        transform.localScale /= 2f;
+        transform.localScale /= _coefficientÂecrease;
+    }
+
+    public void GetReduceChanceSeparation()
+    {
+        _chanceSeparation /= _coefficientÂecrease;
     }
 }

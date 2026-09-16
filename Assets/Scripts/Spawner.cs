@@ -10,19 +10,30 @@ public class Spawner : MonoBehaviour
     private int _minCountNewCube = 2;
     private int _maxCountNewCube = 7;
 
-    public void SpawnCubes()
+    public List<Rigidbody> SpawnCubes(Cube parentCube)
     {
+        List<Rigidbody> rigidbodyCubes = new List<Rigidbody>();
+
         _countCubes = Random.Range(_minCountNewCube, _maxCountNewCube);
 
         for (int i = 0; i < _countCubes; i++)
-        {
-            GameObject newCube = Instantiate(_newCubePrefab, transform.position, transform.rotation);
+        {            
+            GameObject newCube = Instantiate(parentCube.gameObject, parentCube.gameObject.transform.position, transform.rotation);
 
             Cube cube = newCube.GetComponent<Cube>();
+            Rigidbody cubeRigidbody = cube.GetComponent<Rigidbody>();
 
             cube.Shrink();               
-            cube.SetRandomColor();          
-            cube.ChanceSeparation /= 2f;
-        }            
+            cube.SetRandomColor();
+            cube.GetReduceChanceSeparation();
+
+            rigidbodyCubes.Add(cubeRigidbody);
+        }
+        return rigidbodyCubes;
+    }
+
+    public void CubeDestroy(Cube cube)
+    {
+        Destroy(cube.gameObject);
     }
 }
