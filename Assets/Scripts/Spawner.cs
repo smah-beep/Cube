@@ -26,6 +26,7 @@ public class Spawner : MonoBehaviour
             cube.Shrink();               
             cube.SetRandomColor();
             cube.GetReduceChanceSeparation();
+            cube.IncreasePowerExplosion();
 
             rigidbodyCubes.Add(cubeRigidbody);
         }

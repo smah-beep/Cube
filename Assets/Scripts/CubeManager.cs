@@ -30,6 +30,7 @@ public class CubeManager : MonoBehaviour
         }
         else
         {
+            _explosion.Explode(cube);
             _spawner.CubeDestroy(cube);
         }
     }
