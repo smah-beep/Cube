@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
+    public float ExplosionRadius { get; private set; } = 20;
+    public float ExplosionForse { get; private set; } = 280;
+    public Rigidbody Rigidbody { get; private set; }
+
+    private float _coefficientIncrease = 1.5f;
     private float _chanceSeparation = 100f;   
     private float _coefficientÂecrease = 2f;
     private Renderer _renderer;
 
-    public float GetChanceSeparation() => _chanceSeparation;
-
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
+        Rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void SetRandomColor()
+    public void Init()
     {
         _renderer.material.color = new Color(Random.value, Random.value, Random.value);
-    }
-
-    public void Shrink()
-    {
         transform.localScale /= _coefficientÂecrease;
+        _chanceSeparation /= _coefficientÂecrease;
+        ExplosionForse *= _coefficientIncrease;
+        ExplosionRadius *= _coefficientIncrease;
     }
 
-    public void GetReduceChanceSeparation()
-    {
-        _chanceSeparation /= _coefficientÂecrease;
-    }
+    public float GetChanceSeparation() => _chanceSeparation;
 }

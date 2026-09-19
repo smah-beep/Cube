@@ -10,7 +10,7 @@ public class Pressing : MonoBehaviour
     private Ray _ray;
     private RaycastHit hit;
 
-    public event Action<Cube> cubeClicked;
+    public event Action<Cube> ÑubeClicked;
 
     private void Update()
     {
@@ -24,7 +24,7 @@ public class Pressing : MonoBehaviour
 
                 if (cube != null)
                 {
-                    cubeClicked?.Invoke(cube);
+                    ÑubeClicked?.Invoke(cube);
                 }
             }
         }
