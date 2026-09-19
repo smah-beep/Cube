@@ -9,21 +9,21 @@ public class CubeManager : MonoBehaviour
     [SerializeField] private Pressing _pressing;
 
     private float _minChanceSeparation = 0f;
-    private float _maxChanceSeparation = 101f;
+    private float _maxChanceSeparation = 100f;
 
     private void OnEnable()
     {
-        _pressing.cubeClicked += ReviewChance;
+        _pressing.ÑubeClicked += ReviewChance;
     }
 
     private void OnDisable()
     {
-        _pressing.cubeClicked -= ReviewChance;
+        _pressing.ÑubeClicked -= ReviewChance;
     }
 
     private void ReviewChance(Cube cube)
     {
-        if(Random.Range(_minChanceSeparation, _maxChanceSeparation) <= cube.GetChanceSeparation())
+        if(Random.Range(_minChanceSeparation, _maxChanceSeparation + 1) <= cube.GetChanceSeparation())
         {
             _explosion.Explode(_spawner.SpawnCubes(cube), cube);
             _spawner.CubeDestroy(cube);

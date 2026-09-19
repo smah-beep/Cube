@@ -4,30 +4,23 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _newCubePrefab;
-
     private int _countCubes;
     private int _minCountNewCube = 2;
-    private int _maxCountNewCube = 7;
+    private int _maxCountNewCube = 6;
 
     public List<Rigidbody> SpawnCubes(Cube parentCube)
     {
         List<Rigidbody> rigidbodyCubes = new List<Rigidbody>();
 
-        _countCubes = Random.Range(_minCountNewCube, _maxCountNewCube);
+        _countCubes = Random.Range(_minCountNewCube, _maxCountNewCube + 1);
 
         for (int i = 0; i < _countCubes; i++)
         {            
-            GameObject newCube = Instantiate(parentCube.gameObject, parentCube.gameObject.transform.position, transform.rotation);
+            Cube newCube = Instantiate(parentCube, parentCube.gameObject.transform.position, transform.rotation);
 
-            Cube cube = newCube.GetComponent<Cube>();
-            Rigidbody cubeRigidbody = cube.GetComponent<Rigidbody>();
+            Rigidbody cubeRigidbody = newCube.Rigidbody;
 
-            cube.Shrink();               
-            cube.SetRandomColor();
-            cube.GetReduceChanceSeparation();
-            cube.IncreasePowerExplosion();
-
+            newCube.Init();
             rigidbodyCubes.Add(cubeRigidbody);
         }
         return rigidbodyCubes;
